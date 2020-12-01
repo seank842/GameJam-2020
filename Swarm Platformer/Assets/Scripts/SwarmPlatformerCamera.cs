@@ -10,22 +10,13 @@ public class SwarmPlatformerCamera : MonoBehaviour
 
     int index;
     bool game_over;
-    float camera_changing_constant;
+    float camera_changing_constant = 1.0f;
     bool camera_transitioning;
-
-    // Movement speed in units per second.
-    public float speed = 50.0f;
-
-    // Time when the movement started.
-    private float startTime;
 
     // Total distance between the markers.
     private float journey_length;
     private float journey_step;
     private float distance_to_target;
-
-    private float start_position;
-    private float end_position;
     void Start()
     {
         game_over = false;
@@ -41,7 +32,7 @@ public class SwarmPlatformerCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!game_over)
         {
@@ -49,9 +40,7 @@ public class SwarmPlatformerCamera : MonoBehaviour
             {
                 float transition_position = transform.position.x + journey_step;
                 transform.position = new Vector3(transition_position, transform.position.y, transform.position.z);
-                print(distance_to_target);
-                print(journey_length);
-                if (Mathf.Abs(transform.position.x - current_player.transform.position.x) > distance_to_target + 0.01f)
+                if (Mathf.Abs(transform.position.x - current_player.transform.position.x) > Mathf.Abs(distance_to_target))
                 {
                     camera_transitioning = false;
                     print("gone too far");
@@ -86,15 +75,10 @@ public class SwarmPlatformerCamera : MonoBehaviour
             index = Random.Range(0, players.Count);
             current_player = players[index];
             camera_transitioning = true;
-            // Keep a note of the time the movement started.
-            startTime = Time.time;
-
-            // Calculate the journey length.
-            start_position = transform.position.x;
-            end_position = current_player.transform.position.y;
-            journey_length = end_position - start_position;
-            journey_step = journey_length / 60.0f;
-            distance_to_target = journey_length;
+            journey_length = current_player.transform.position.x - transform.position.x;
+            float frames_transition = camera_changing_constant * 50.0f;
+            journey_step = journey_length / frames_transition;
+            distance_to_target = Mathf.Abs(transform.position.x - current_player.transform.position.x);
             Destroy(players[index], 5.0f); //testing purposes only
         }
     }

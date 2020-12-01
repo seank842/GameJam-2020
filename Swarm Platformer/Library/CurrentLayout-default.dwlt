@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2048
     height: 1068.8
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 137
+  controlID: 121
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 442}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 69
+  controlID: 122
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,9 +167,9 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1388
-    height: 391.2
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+    height: 359.2
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -194,11 +194,11 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 391.2
+    y: 359.2
     width: 1388
-    height: 627.60004
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+    height: 659.60004
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 115
+  controlID: 50
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -330,7 +330,7 @@ MonoBehaviour:
     x: 0
     y: 73.6
     width: 1387
-    height: 370.2
+    height: 338.2
   m_ViewDataDictionary: {fileID: 0}
   m_ShowContextualTools: 0
   m_WindowGUID: 3568670b041fdd849982a868b379d51b
@@ -343,9 +343,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -55.72593, y: -25.534079, z: -5.4619946}
+    m_Target: {x: -27.649443, y: -30.191633, z: -7.838556}
     speed: 2
-    m_Value: {x: -55.72593, y: -25.534079, z: -5.4619946}
+    m_Value: {x: -27.649443, y: -30.191633, z: -7.838556}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -392,9 +392,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.21539976, y: 0.62260485, z: -0.18383068, w: -0.72950685}
+    m_Target: {x: -0.28218755, y: 0.6478943, z: -0.2816727, w: -0.6490575}
     speed: 2
-    m_Value: {x: -0.21539891, y: 0.6226024, z: -0.18382995, w: -0.729504}
+    m_Value: {x: -0.28218588, y: 0.64789045, z: -0.28167102, w: -0.64905363}
   m_Size:
     m_Target: 37.44986
     speed: 2
@@ -556,9 +556,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 464.80002
+    y: 432.80002
     width: 1387
-    height: 606.60004
+    height: 638.60004
   m_ViewDataDictionary: {fileID: 0}
   m_SerializedViewNames: []
   m_SerializedViewValues: []
@@ -603,22 +603,22 @@ MonoBehaviour:
       x: 0
       y: 21
       width: 1387
-      height: 585.60004
-    m_Scale: {x: 0.6777778, y: 0.6777778}
-    m_Translation: {x: 693.5, y: 292.80002}
+      height: 617.60004
+    m_Scale: {x: 0.71481484, y: 0.71481484}
+    m_Translation: {x: 693.5, y: 308.80002}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1023.19666
+      x: -970.18134
       y: -432
-      width: 2046.3933
+      width: 1940.3627
       height: 864
     m_MinimalGUI: 1
-  m_defaultScale: 0.6777778
-  m_LastWindowPixelSize: {x: 1733.75, y: 758.25006}
+  m_defaultScale: 0.71481484
+  m_LastWindowPixelSize: {x: 1733.75, y: 798.25006}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 00000000000000000000
@@ -654,7 +654,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 34fbffff
+      m_ExpandedIDs: 60f8ffff38f9ffff62faffff30fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -716,12 +716,12 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scenes
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Samuel\Desktop\Projects\SwarmPlatformer\GameJam-2020\Swarm
     Platformer
@@ -729,9 +729,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5a370000
-    m_LastClickedID: 14170
-    m_ExpandedIDs: 000000005037000000ca9a3b
+    m_SelectedIDs: 60370000
+    m_LastClickedID: 14176
+    m_ExpandedIDs: 000000005837000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -759,7 +759,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000050370000
+    m_ExpandedIDs: 0000000058370000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
