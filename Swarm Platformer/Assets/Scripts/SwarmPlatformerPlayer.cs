@@ -5,9 +5,10 @@ using UnityEngine;
 public class SwarmPlatformerPlayer : MonoBehaviour
 {
     Rigidbody player_rb;
-    MeshRenderer player_mr;
-    public Material sub_max_velocity_colour;
-    public Material max_velocity_colour;
+    Animator player_an;
+    //MeshRenderer player_mr;
+    //public Material sub_max_velocity_colour;
+    //public Material max_velocity_colour;
     bool grounded;
     bool no_input;
 
@@ -18,8 +19,8 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     float max_velocity = 10.0f;
     float current_velocity;
     public float jump_height;
-    float min_jump_height = 3.0f;
-    float max_jump_height = 10.0f;
+    float min_jump_height = 8.0f;
+    float max_jump_height = 12.0f;
     public float size;
     float min_size = 0.25f;
     float max_size = 2.0f;
@@ -39,7 +40,8 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     void Start()
     {
         player_rb = GetComponent<Rigidbody>();
-        player_mr = GetComponent<MeshRenderer>();
+        player_an = GetComponent<Animator>();
+        //player_mr = GetComponent<MeshRenderer>();
         grounded = true;
         if (randomise_characteristics)
         {
@@ -55,6 +57,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         if (no_input)
         {
             player_rb.velocity = new Vector3(0.0f, player_rb.velocity.y, 0.0f);
+            player_an.SetBool("running", false);
             current_velocity = 0.0f;
         }
     }
@@ -82,20 +85,24 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         if (current_velocity > velocity)
         {
             current_velocity = velocity;
-            player_mr.material = max_velocity_colour;
+            //player_mr.material = max_velocity_colour;
         }
         else
         {
-            player_mr.material = sub_max_velocity_colour;
+            //player_mr.material = sub_max_velocity_colour;
         }
         if (Input.GetKey(KeyCode.D))
         {
             player_rb.velocity = new Vector3(current_velocity, player_rb.velocity.y, 0.0f);
+            player_rb.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
+            player_an.SetBool("running", true);
             no_input = false;
         }
         else if (Input.GetKey(KeyCode.A))
         {
             player_rb.velocity = new Vector3(-current_velocity, player_rb.velocity.y, 0.0f);
+            player_rb.rotation = Quaternion.Euler(0.0f, -90.0f, 0.0f);
+            player_an.SetBool("running", true);
             no_input = false;
         }
     }
@@ -108,7 +115,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         fall_multiplier = Random.Range(min_fall_multiplier, max_fall_multiplier);
         acceleration = Random.Range(min_acceleration, max_acceleration);
         reaction_time = Random.Range(min_reaction_time, max_reaction_time);
-        transform.localScale = new Vector3(size, size, size);
+        //transform.localScale = new Vector3(size, size, size);
     }
 
     private void OnCollisionEnter(Collision collision)
