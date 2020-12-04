@@ -28,7 +28,7 @@ public class SwarmPlatformerCamera : MonoBehaviour
          }
         index = Random.Range(0, players.Count);
         current_player = players[index];
-        Destroy(players[index], 5.0f); //testing purposes only
+        //Destroy(players[index], 5.0f); //testing purposes only
     }
 
     // Update is called once per frame
@@ -79,7 +79,7 @@ public class SwarmPlatformerCamera : MonoBehaviour
             float frames_transition = camera_changing_constant * 50.0f;
             journey_step = journey_length / frames_transition;
             distance_to_target = Mathf.Abs(transform.position.x - current_player.transform.position.x);
-            Destroy(players[index], 5.0f); //testing purposes only
+            //Destroy(players[index], 5.0f); //testing purposes only
         }
     }
 }
