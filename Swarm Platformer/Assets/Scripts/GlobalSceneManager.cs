@@ -9,6 +9,10 @@ public class GlobalSceneManager : MonoBehaviour
 {
     #region Fields
     [SerializeField]
+    private int _startTimeSeconds;
+    [SerializeField]
+    private int _startTimeMinutes;
+    [SerializeField]
     private Text _survivorsText;
     [SerializeField]
     private Text _timerText;
@@ -16,6 +20,16 @@ public class GlobalSceneManager : MonoBehaviour
     #endregion
 
     #region Properties 
+    public int StartTimeSeconds
+    {
+        get => _startTimeSeconds;
+        set => _startTimeSeconds = value;
+    }
+    public int StartTimeMinuets
+    {
+        get => _startTimeMinutes;
+        set => _startTimeMinutes = value;
+    }
     public Text SurvivorsText
     {
         get => _survivorsText;
@@ -42,7 +56,7 @@ public class GlobalSceneManager : MonoBehaviour
         {
             Players.Add(player);
         }
-        _timeLeft = new TimeSpan(0, 0, 30);
+        _timeLeft = new TimeSpan(0, StartTimeMinuets, StartTimeSeconds);
     }
 
     // Update is called once per frame

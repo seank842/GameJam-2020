@@ -178,6 +178,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GlobalSceneManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2078841306641130181, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: _startTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078841306641130181, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: _startTimeSeconds
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2078841306641130181, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: _startTimeMinutes
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
 --- !u!1 &135417679
@@ -874,8 +886,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   current_player: {fileID: 0}
-  players_array: []
-  players: []
 --- !u!1 &1314910426
 GameObject:
   m_ObjectHideFlags: 0
