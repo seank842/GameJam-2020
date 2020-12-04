@@ -9,41 +9,38 @@ public class GlobalSceneManager : MonoBehaviour
 {
     #region Fields
     [SerializeField]
-    private int _startTimeSeconds;
+    private Text _suvivorsText;
     [SerializeField]
-    private int _startTimeMinutes;
+    private GameTimeManager _gameTimeManager;
     [SerializeField]
-    private Text _survivorsText;
+    private GameObject _gameOverCanvas;
     [SerializeField]
-    private Text _timerText;
-    private TimeSpan _timeLeft;
+    private static List<GameObject> _players;
     #endregion
 
     #region Properties 
-    public int StartTimeSeconds
-    {
-        get => _startTimeSeconds;
-        set => _startTimeSeconds = value;
-    }
-    public int StartTimeMinuets
-    {
-        get => _startTimeMinutes;
-        set => _startTimeMinutes = value;
-    }
+    public static bool GameOver { get; private set; }
     public Text SurvivorsText
     {
-        get => _survivorsText;
-        set => _survivorsText = value;
+        get => _suvivorsText;
+        set => _suvivorsText = value;
     }
-
-    public Text TimerText
+    public GameObject GameOverCanvas
     {
-        get => _timerText;
-        set => _timerText = value;
+        get => _gameOverCanvas;
+        set => _gameOverCanvas = value;
     }
-
-    public static List<GameObject> Players;
-    public GameObject[] PlayersArray; // FindGameObjectWithTag returns an array not a list so this is needed
+    public GameTimeManager GameTimeManager
+    {
+        get => _gameTimeManager;
+        set => _gameTimeManager = value;
+    }
+    public static List<GameObject> Players
+    {
+        get => _players;
+        set => _players = value;
+    }
+    public GameObject[] PlayersArray { get; set; } // FindGameObjectWithTag returns an array not a list so this is needed
     #endregion
 
     // Start is called before the first frame update
@@ -56,22 +53,41 @@ public class GlobalSceneManager : MonoBehaviour
         {
             Players.Add(player);
         }
-        _timeLeft = new TimeSpan(0, StartTimeMinuets, StartTimeSeconds);
+
+        GameTimeManager.GameOverEvent += GameTimeManager_GameOverEvent;
+    }
+
+    private void GameTimeManager_GameOverEvent(object sender, EventArgs e)
+    {
+        GameOver = true;
+        GameOverCanvas.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void RetryScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+    }
+
+    public void GotToMainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
+        Time.timeScale = 1;
+    }
+
+    public void QuitApplication()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     // Update is called once per frame
     void Update()
     {
-        _timeLeft -= TimeSpan.FromSeconds(Time.deltaTime);
-        if(_timeLeft < TimeSpan.FromSeconds(0))
-        {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-            Application.Quit();
-#endif
-        }
-        _survivorsText.text = $"Survivors: {Players.Count}";
-        _timerText.text = _timeLeft.ToString(@"m\:ss\.fff");
+        SurvivorsText.text = $"Survivors: {Players.Count}";
     }
 }
