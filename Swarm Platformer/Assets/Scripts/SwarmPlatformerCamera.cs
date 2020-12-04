@@ -6,7 +6,7 @@ public class SwarmPlatformerCamera : MonoBehaviour
 {
     public GameObject current_player;
     public GameObject[] players_array; // FindGameObjectWithTag returns an array not a list 
-    public List<GameObject> players = new List<GameObject>();
+    public static List<GameObject> players = new List<GameObject>();
 
     int index;
     bool game_over;
