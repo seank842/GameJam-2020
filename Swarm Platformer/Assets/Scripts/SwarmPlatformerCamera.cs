@@ -5,8 +5,6 @@ using UnityEngine;
 public class SwarmPlatformerCamera : MonoBehaviour
 {
     public GameObject current_player;
-    public GameObject[] players_array; // FindGameObjectWithTag returns an array not a list 
-    public static List<GameObject> players = new List<GameObject>();
 
     int index;
     bool game_over;
@@ -20,15 +18,10 @@ public class SwarmPlatformerCamera : MonoBehaviour
     void Start()
     {
         game_over = false;
-         players_array = GameObject.FindGameObjectsWithTag("Player");
- 
-         foreach (GameObject player in players_array)
-         {
-            players.Add(player);
-         }
-        index = Random.Range(0, players.Count);
-        current_player = players[index];
-        //Destroy(players[index], 5.0f); //testing purposes only
+        
+        index = Random.Range(0, GlobalSceneManager.Players.Count);
+        current_player = GlobalSceneManager.Players[index];
+        //Destroy(GlobalSceneManager.Players[index], 5.0f); //testing purposes only
     }
 
     // Update is called once per frame
@@ -64,22 +57,22 @@ public class SwarmPlatformerCamera : MonoBehaviour
 
     private void UpdateCamera()
     {
-        players.RemoveAt(index);
-        if (players.Count == 0)
+        GlobalSceneManager.Players.RemoveAt(index);
+        if (GlobalSceneManager.Players.Count == 0)
         {
             game_over = true;
-            print("No players left");
+            print("No GlobalSceneManager.Players left");
         }
         else
         {
-            index = Random.Range(0, players.Count);
-            current_player = players[index];
+            index = Random.Range(0, GlobalSceneManager.Players.Count);
+            current_player = GlobalSceneManager.Players[index];
             camera_transitioning = true;
             journey_length = current_player.transform.position.x - transform.position.x;
             float frames_transition = camera_changing_constant * 50.0f;
             journey_step = journey_length / frames_transition;
             distance_to_target = Mathf.Abs(transform.position.x - current_player.transform.position.x);
-            //Destroy(players[index], 5.0f); //testing purposes only
+            //Destroy(GlobalSceneManager.Players[index], 5.0f); //testing purposes only
         }
     }
 }

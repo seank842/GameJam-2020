@@ -28,13 +28,20 @@ public class GlobalSceneManager : MonoBehaviour
         set => _timerText = value;
     }
 
-    public List<GameObject> Players;
+    public static List<GameObject> Players;
+    public GameObject[] PlayersArray; // FindGameObjectWithTag returns an array not a list so this is needed
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         Players = new List<GameObject>();
+        PlayersArray = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject player in PlayersArray)
+        {
+            Players.Add(player);
+        }
         _timeLeft = new TimeSpan(0, 0, 30);
     }
 
