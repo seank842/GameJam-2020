@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,20 +6,16 @@ public class MainMenuManager : MonoBehaviour
 {
     public GameObject MainMenu;
     public GameObject CreditsMenu;
-    public GameObject LevelSelectionMenu;
 
     // Start is called before the first frame update
     void Start()
     {
-        MainMenu.SetActive(true);
-        CreditsMenu.SetActive(false);
-        LevelSelectionMenu.SetActive(false);
+        MainMenuButton();
     }
 
-    public void LevelSelectButton()
+    public void StartButton()
     {
-        MainMenu.SetActive(false);
-        LevelSelectionMenu.SetActive(true);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Level_One");
     }
 
     public void CreditsButton()
@@ -29,23 +24,14 @@ public class MainMenuManager : MonoBehaviour
         CreditsMenu.SetActive(true);
     }
 
-    public void MainMenuButton(GameObject sender)
+    public void MainMenuButton()
     {
-        sender.SetActive(false);
         MainMenu.SetActive(true);
-    }
-
-    public void LoadScene(string sceneName)
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        CreditsMenu.SetActive(false);
     }
 
     public void QuitButton()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
         Application.Quit();
-#endif
     }
 }
