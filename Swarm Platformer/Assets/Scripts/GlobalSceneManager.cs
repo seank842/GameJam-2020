@@ -16,7 +16,7 @@ public class GlobalSceneManager : MonoBehaviour
     [SerializeField]
     private GameObject _gameOverCanvas;
     [SerializeField]
-    private static List<GameObject> _players;
+    private List<GameObject> _players;
     #endregion
 
     #region Properties 
@@ -36,7 +36,7 @@ public class GlobalSceneManager : MonoBehaviour
         get => _gameTimeManager;
         set => _gameTimeManager = value;
     }
-    public static List<GameObject> Players
+    public List<GameObject> Players
     {
         get => _players;
         set => _players = value;
@@ -51,6 +51,8 @@ public class GlobalSceneManager : MonoBehaviour
         {
             player.GetComponent<SwarmPlatformerPlayer>().PlayerDestroyedEvent += GlobalSceneManager_PlayerDestroyedEvent;
         }
+
+        PlayerChangedEvent.Invoke(this, default);
 
         GameTimeManager.GameOverEvent += GameTimeManager_GameOverEvent;
     }
@@ -108,5 +110,10 @@ public class GlobalSceneManager : MonoBehaviour
     void Update()
     {
         SurvivorsText.text = $"Survivors: {Players.Count}";
+    }
+
+    private void OnDestroy()
+    {
+        GameTimeManager.GameOverEvent -= GameTimeManager_GameOverEvent;
     }
 }

@@ -938,7 +938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46fb26ebb9e9584daff33e87f6274ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  current_player: {fileID: 0}
+  current_player: {fileID: 1979096662}
   scene_manager: {fileID: 1564160767}
 --- !u!1001 &1223213631
 PrefabInstance:
@@ -951,6 +951,14 @@ PrefabInstance:
       propertyPath: _startTimeMinuets
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9150589280713954146, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 9150589281684287168, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 9150589282131677285, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.047572523
@@ -999,6 +1007,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GlobalSceneManager
       objectReference: {fileID: 0}
+    - target: {fileID: 9150589282350551186, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
 --- !u!1 &1314910426
@@ -1519,6 +1531,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1979096662 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 517469952045039563, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
+  m_PrefabInstance: {fileID: 859912648851886323}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1988083094
 PrefabInstance:
   m_ObjectHideFlags: 0
