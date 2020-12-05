@@ -61,11 +61,6 @@ public class SwarmPlatformerCamera : MonoBehaviour
         {
             transform.position = new Vector3(current_player.transform.position.x, transform.position.y, transform.position.z);
         }
-        else
-        {
-            UpdateCamera();
-            print("updating camera position");
-        }
     }
 
     private void UpdateCamera()
