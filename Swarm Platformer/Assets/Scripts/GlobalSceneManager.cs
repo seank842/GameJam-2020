@@ -69,14 +69,16 @@ public class GlobalSceneManager : MonoBehaviour
         }
         else
         {
-            // Run Game Over
-            GameOver = true;
-            GameOverCanvas.SetActive(true);
-            Time.timeScale = 0;
+            TriggerGameOver("Reason");
         }
     }
 
     private void GameTimeManager_GameOverEvent(object sender, EventArgs e)
+    {
+        TriggerGameOver("Reason");
+    }
+
+    public void TriggerGameOver(string reason)
     {
         GameOver = true;
         GameOverCanvas.SetActive(true);
