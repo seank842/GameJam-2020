@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Spawner
+  - Hazard
   layers:
   - Default
   - TransparentFX

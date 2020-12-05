@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +10,17 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     //MeshRenderer player_mr;
     //public Material sub_max_velocity_colour;
     //public Material max_velocity_colour;
+    public GameObject giblet_arm_1;
+    public GameObject giblet_arm_2;
+    public GameObject giblet_leg_1;
+    public GameObject giblet_leg_2;
+    public GameObject giblet_head;
+    public GameObject giblet_torso;
     bool grounded;
     bool no_input;
+    bool player_killed;
 
-    public bool randomise_characteristics;
+    public bool Randomise_characteristics;
 
     public float velocity;
     float min_velocity = 2.0f;
@@ -22,8 +30,8 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     float min_jump_height = 8.0f;
     float max_jump_height = 12.0f;
     public float size;
-    float min_size = 0.25f;
-    float max_size = 2.0f;
+    float min_size = 0.5f;
+    float max_size = 1.5f;
     public float fall_multiplier;
     float min_fall_multiplier = 1.5f;
     float max_fall_multiplier = 2.5f; 
@@ -43,7 +51,8 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         player_an = GetComponent<Animator>();
         //player_mr = GetComponent<MeshRenderer>();
         grounded = true;
-        if (randomise_characteristics)
+        player_killed = false;
+        if (Randomise_characteristics)
         {
             DetermineRandomCharacteristics();
         }
@@ -109,13 +118,15 @@ public class SwarmPlatformerPlayer : MonoBehaviour
 
     void DetermineRandomCharacteristics()
     {
-        velocity = Random.Range(min_velocity, max_velocity);
-        jump_height = Random.Range(min_jump_height, max_jump_height);
-        size = Random.Range(min_size, max_size);
-        fall_multiplier = Random.Range(min_fall_multiplier, max_fall_multiplier);
-        acceleration = Random.Range(min_acceleration, max_acceleration);
-        reaction_time = Random.Range(min_reaction_time, max_reaction_time);
-        //transform.localScale = new Vector3(size, size, size);
+        velocity = UnityEngine.Random.Range(min_velocity, max_velocity);
+        jump_height = UnityEngine.Random.Range(min_jump_height, max_jump_height);
+        size = UnityEngine.Random.Range(min_size, max_size);
+        transform.localScale = new Vector3(transform.localScale.x * size,
+                                           transform.localScale.y * size,
+                                           transform.localScale.z * size);
+        fall_multiplier = UnityEngine.Random.Range(min_fall_multiplier, max_fall_multiplier);
+        acceleration = UnityEngine.Random.Range(min_acceleration, max_acceleration);
+        reaction_time = UnityEngine.Random.Range(min_reaction_time, max_reaction_time);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -124,5 +135,30 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         {
             grounded = true;
         }
+        else if (collision.gameObject.tag == "Hazard" && !player_killed)
+        {
+            player_killed = true;
+            Transform modified_transform = transform;
+            modified_transform.position = new Vector3(modified_transform.position.x,
+                                                      modified_transform.position.y + 0.1f,
+                                                      modified_transform.position.z);
+            Instantiate(giblet_arm_1, modified_transform).transform.parent = null;
+            Instantiate(giblet_arm_2, modified_transform).transform.parent = null;
+            Instantiate(giblet_leg_1, modified_transform).transform.parent = null;
+            Instantiate(giblet_leg_2, modified_transform).transform.parent = null;
+            Instantiate(giblet_head, modified_transform).transform.parent = null;
+            Instantiate(giblet_torso, modified_transform).transform.parent = null;
+            gameObject.SetActive(false);
+            Destroy(gameObject, 1.0f);
+        }
     }
+
+    
+    private void OnDestroy()
+    {
+        PlayerDestroyedEvent.Invoke(this, null);
+
+    }
+
+    public event EventHandler PlayerDestroyedEvent;
 }

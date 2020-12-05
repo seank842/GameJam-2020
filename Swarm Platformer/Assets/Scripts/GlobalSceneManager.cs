@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,21 +41,37 @@ public class GlobalSceneManager : MonoBehaviour
         get => _players;
         set => _players = value;
     }
-    public GameObject[] PlayersArray { get; set; } // FindGameObjectWithTag returns an array not a list so this is needed
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        Players = new List<GameObject>();
-        PlayersArray = GameObject.FindGameObjectsWithTag("Player");
-
-        foreach (GameObject player in PlayersArray)
+        Players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+        foreach (var player in Players)
         {
-            Players.Add(player);
+            player.GetComponent<SwarmPlatformerPlayer>().PlayerDestroyedEvent += GlobalSceneManager_PlayerDestroyedEvent;
         }
 
         GameTimeManager.GameOverEvent += GameTimeManager_GameOverEvent;
+    }
+
+    private void GlobalSceneManager_PlayerDestroyedEvent(object sender, EventArgs e)
+    {
+        var senderScript = (SwarmPlatformerPlayer)sender;
+        var senderGameObject = senderScript.gameObject;
+        senderScript.PlayerDestroyedEvent -= GlobalSceneManager_PlayerDestroyedEvent;
+        if (Players.Where(p => !p.GetInstanceID().Equals(senderGameObject.GetInstanceID())).Any())
+        {
+            PlayerChangedEvent.Invoke(this, senderGameObject);
+            Players.Remove(senderGameObject);
+        }
+        else
+        {
+            // Run Game Over
+            GameOver = true;
+            GameOverCanvas.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 
     private void GameTimeManager_GameOverEvent(object sender, EventArgs e)
@@ -84,6 +101,8 @@ public class GlobalSceneManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+    public event EventHandler<GameObject> PlayerChangedEvent;
 
     // Update is called once per frame
     void Update()
