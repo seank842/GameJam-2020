@@ -149,7 +149,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
             Instantiate(giblet_head, modified_transform).transform.parent = null;
             Instantiate(giblet_torso, modified_transform).transform.parent = null;
             gameObject.SetActive(false);
-            Destroy(gameObject, 1.0f);
+            Destroy(gameObject, 0.3f);
         }
     }
 
