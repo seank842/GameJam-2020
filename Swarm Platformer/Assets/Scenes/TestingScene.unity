@@ -435,6 +435,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &596295358 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3026001919738754356, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+  m_PrefabInstance: {fileID: 5299155712109594439}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &631853722
 GameObject:
   m_ObjectHideFlags: 0
@@ -1578,6 +1583,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 455817488569033340, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: _startTimeSeconds
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299155711358236088, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: _gameTimeManager
+      value: 
+      objectReference: {fileID: 596295358}
     - target: {fileID: 5299155713030842930, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
       propertyPath: current_player
       value: 

@@ -156,7 +156,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     
     private void OnDestroy()
     {
-        PlayerDestroyedEvent.Invoke(this, null);
+        PlayerDestroyedEvent?.Invoke(this, null);
     }
 
     public event EventHandler PlayerDestroyedEvent;

@@ -12,7 +12,7 @@ public class GlobalSceneManager : MonoBehaviour
     [SerializeField]
     private Text _suvivorsText;
     [SerializeField]
-    private GameTimeManager _gameTimeManager;
+    private GameObject _gameTimeManager;
     [SerializeField]
     private GameObject _gameOverCanvas;
     [SerializeField]
@@ -31,7 +31,7 @@ public class GlobalSceneManager : MonoBehaviour
         get => _gameOverCanvas;
         set => _gameOverCanvas = value;
     }
-    public GameTimeManager GameTimeManager
+    public GameObject GameTimeManager
     {
         get => _gameTimeManager;
         set => _gameTimeManager = value;
@@ -54,7 +54,7 @@ public class GlobalSceneManager : MonoBehaviour
 
         PlayerChangedEvent.Invoke(this, default);
 
-        GameTimeManager.GameOverEvent += GameTimeManager_GameOverEvent;
+        GameTimeManager.GetComponent<GameTimeManager>().GameOverEvent += GameTimeManager_GameOverEvent;
     }
 
     private void GlobalSceneManager_PlayerDestroyedEvent(object sender, EventArgs e)
@@ -69,17 +69,21 @@ public class GlobalSceneManager : MonoBehaviour
         }
         else
         {
-            TriggerGameOver("Reason");
+            TriggerGameOver();
         }
     }
 
     private void GameTimeManager_GameOverEvent(object sender, EventArgs e)
     {
-        TriggerGameOver("Reason");
+        TriggerGameOver();
     }
 
-    public void TriggerGameOver(string reason)
+    public void TriggerGameOver()
     {
+        foreach (var player in Players)
+        {
+            player.GetComponent<SwarmPlatformerPlayer>().PlayerDestroyedEvent -= GlobalSceneManager_PlayerDestroyedEvent;
+        }
         GameOver = true;
         GameOverCanvas.SetActive(true);
         Time.timeScale = 0;
@@ -116,6 +120,6 @@ public class GlobalSceneManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameTimeManager.GameOverEvent -= GameTimeManager_GameOverEvent;
+        GameTimeManager.GetComponent<GameTimeManager>().GameOverEvent -= GameTimeManager_GameOverEvent;
     }
 }
