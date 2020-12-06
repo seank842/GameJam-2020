@@ -104,7 +104,7 @@ MonoBehaviour:
   giblet_leg_2: {fileID: 4042166409056226881, guid: e8a6be5c4f3d9e5468f22341ced33ae2, type: 3}
   giblet_head: {fileID: 5244357172933905883, guid: 4e9f93eaeaeb38f4a88b76c246145ca2, type: 3}
   giblet_torso: {fileID: 1399226245235580585, guid: 876d12520255db647ac62926859e8a01, type: 3}
-  randomise_characteristics: 1
+  Randomise_characteristics: 1
   velocity: 0
   jump_height: 0
   size: 0
