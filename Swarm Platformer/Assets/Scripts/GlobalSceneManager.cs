@@ -64,21 +64,21 @@ public class GlobalSceneManager : MonoBehaviour
         senderScript.PlayerDestroyedEvent -= GlobalSceneManager_PlayerDestroyedEvent;
         if (Players.Where(p => !p.GetInstanceID().Equals(senderGameObject.GetInstanceID())).Any())
         {
-            PlayerChangedEvent.Invoke(this, senderGameObject);
+            PlayerChangedEvent?.Invoke(this, senderGameObject);
             Players.Remove(senderGameObject);
         }
         else
         {
-            TriggerGameOver();
+            TriggerGameOver("Reason");
         }
     }
 
     private void GameTimeManager_GameOverEvent(object sender, EventArgs e)
     {
-        TriggerGameOver();
+        TriggerGameOver("Reason");
     }
 
-    public void TriggerGameOver()
+    public void TriggerGameOver(string reason)
     {
         foreach (var player in Players)
         {
