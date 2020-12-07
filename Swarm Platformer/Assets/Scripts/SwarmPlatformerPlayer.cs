@@ -16,6 +16,10 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     public GameObject giblet_leg_2;
     public GameObject giblet_head;
     public GameObject giblet_torso;
+    public GameObject blood_splatter;
+    public GameObject camera;
+    AudioSource player_audio_source;
+    public AudioClip[] player_death_noises;
     bool grounded;
     bool no_input;
     bool player_killed;
@@ -47,6 +51,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
 
     void Start()
     {
+        player_audio_source = GetComponent<AudioSource>();
         player_rb = GetComponent<Rigidbody>();
         player_an = GetComponent<Animator>();
         //player_mr = GetComponent<MeshRenderer>();
@@ -67,7 +72,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         bool descending = player_rb.velocity.y < 0.0f;
         if (descending)
         {
-            print("descending with velocity: " + player_rb.velocity.y);
+            //print("descending with velocity: " + player_rb.velocity.y);
             player_an.SetBool("falling down", true);
             player_an.SetBool("jumping up", false);
             player_rb.velocity += Vector3.up * Physics2D.gravity.y * (fall_multiplier - 1.0f) * Time.deltaTime;
@@ -119,7 +124,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         {
             player_rb.velocity = new Vector3(current_velocity, player_rb.velocity.y, 0.0f);
             player_rb.rotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
-            player_an.SetBool("running", true);
+            player_an.SetBool("running", true); 
             no_input = false;
         }
         else if (Input.GetKey(KeyCode.A))
@@ -153,6 +158,9 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         else if (collision.gameObject.tag == "Hazard" && !player_killed)
         {
             player_killed = true;
+            int clip_index = UnityEngine.Random.Range(0, player_death_noises.Length);
+            AudioSource.PlayClipAtPoint(player_death_noises[clip_index], camera.transform.position);
+            Instantiate(blood_splatter, transform).transform.parent = null;
             Transform modified_transform = transform;
             modified_transform.position = new Vector3(modified_transform.position.x,
                                                       modified_transform.position.y + 0.1f,
@@ -166,8 +174,11 @@ public class SwarmPlatformerPlayer : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(gameObject, 0.3f);
         }
-        else if (collision.gameObject.tag == "Out Of Bounds Box")
+        else if (collision.gameObject.tag == "Out Of Bounds Box" && !player_killed)
         {
+            player_killed = true;
+            int clip_index = UnityEngine.Random.Range(0, player_death_noises.Length);
+            AudioSource.PlayClipAtPoint(player_death_noises[clip_index], camera.transform.position);
             Destroy(gameObject);
         }
     }
