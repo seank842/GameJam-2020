@@ -23,21 +23,21 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     public bool Randomise_characteristics;
 
     public float velocity;
-    float min_velocity = 2.0f;
-    float max_velocity = 10.0f;
+    float min_velocity = 15.0f;
+    float max_velocity = 25.0f;
     float current_velocity;
     public float jump_height;
-    float min_jump_height = 8.0f;
-    float max_jump_height = 12.0f;
+    float min_jump_height = 10.0f;
+    float max_jump_height = 20.0f;
     public float size;
-    float min_size = 0.5f;
-    float max_size = 1.5f;
+    float min_size = 0.75f;
+    float max_size = 1.25f;
     public float fall_multiplier;
     float min_fall_multiplier = 1.5f;
-    float max_fall_multiplier = 2.5f; 
+    float max_fall_multiplier = 4.5f; 
     public float acceleration;
-    float min_acceleration = 2.0f;
-    float max_acceleration = 4.0f;
+    float min_acceleration = 50.0f;
+    float max_acceleration = 100.0f;
 
     // yet to implement reaction time
 
@@ -50,7 +50,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         player_rb = GetComponent<Rigidbody>();
         player_an = GetComponent<Animator>();
         //player_mr = GetComponent<MeshRenderer>();
-        grounded = true;
+        grounded = false;
         player_killed = false;
         if (Randomise_characteristics)
         {
@@ -63,6 +63,19 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         no_input = true;
         HandleMoving();
         HandleJumping();
+
+        bool descending = player_rb.velocity.y < 0.0f;
+        if (descending)
+        {
+            print("descending with velocity: " + player_rb.velocity.y);
+            player_an.SetBool("falling down", true);
+            player_an.SetBool("jumping up", false);
+            player_rb.velocity += Vector3.up * Physics2D.gravity.y * (fall_multiplier - 1.0f) * Time.deltaTime;
+        }
+        if (grounded)
+        {
+            player_an.SetBool("falling down", false);
+        }
         if (no_input)
         {
             player_rb.velocity = new Vector3(0.0f, player_rb.velocity.y, 0.0f);
@@ -79,11 +92,13 @@ public class SwarmPlatformerPlayer : MonoBehaviour
             {
                 grounded = false;
                 player_rb.velocity = Vector3.up * jump_height;
+                player_an.SetBool("jumping up", true);
             }
-            if (player_rb.velocity.y < 0.0f)
-            {
-                player_rb.velocity += Vector3.up * Physics2D.gravity.y * (fall_multiplier - 1.0f) * Time.deltaTime;
-            }
+            // keep this here for now but can probably remove later
+            //if (player_rb.velocity.y < 0.0f)
+            //{
+            //    player_rb.velocity += Vector3.up * Physics2D.gravity.y * (fall_multiplier - 1.0f) * Time.deltaTime;
+            //}
             no_input = false;
         }
     }
@@ -151,9 +166,21 @@ public class SwarmPlatformerPlayer : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(gameObject, 0.3f);
         }
+        else if (collision.gameObject.tag == "Out Of Bounds Box")
+        {
+            Destroy(gameObject);
+        }
     }
 
-    
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor" && collision.gameObject.transform.position.y < transform.position.y)
+        {
+            grounded = false;
+        }
+    }
+
+
     private void OnDestroy()
     {
         PlayerDestroyedEvent?.Invoke(this, null);

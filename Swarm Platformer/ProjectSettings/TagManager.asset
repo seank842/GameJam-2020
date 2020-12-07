@@ -8,6 +8,7 @@ TagManager:
   - Spawner
   - Hazard
   - Falling Floor
+  - Out Of Bounds Box
   layers:
   - Default
   - TransparentFX
