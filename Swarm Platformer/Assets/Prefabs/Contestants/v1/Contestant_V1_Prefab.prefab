@@ -112,6 +112,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c8e80709a04234524b8946846c5db217, type: 3}
   - {fileID: 8300000, guid: baf532ce5c77941e1be77aab548f880d, type: 3}
   - {fileID: 8300000, guid: 19b6db7ce7a924b6493eac4bf8acf69d, type: 3}
+  player_victory_noise: {fileID: 8300000, guid: a45339362ec64294fabf7e4d24c408d1, type: 3}
   Randomise_characteristics: 1
   velocity: 0
   jump_height: 0

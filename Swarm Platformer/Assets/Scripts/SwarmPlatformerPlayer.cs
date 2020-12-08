@@ -20,6 +20,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     public GameObject blood_splatter;
     public GameObject camera;
     public AudioClip[] player_death_noises;
+    public AudioClip player_victory_noise;
     bool grounded;
     bool no_input;
     bool player_removed;
@@ -192,6 +193,16 @@ public class SwarmPlatformerPlayer : MonoBehaviour
             AudioSource.PlayClipAtPoint(player_death_noises[clip_index], camera.transform.position);
             Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "Finish Line" && collision.gameObject.transform.position.y < transform.position.y && !player_removed)
+        {
+            player_removed = true;
+
+            // Add score here
+
+            AudioSource.PlayClipAtPoint(player_victory_noise, camera.transform.position);
+            gameObject.SetActive(false);
+            Destroy(gameObject, 0.3f);
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -199,15 +210,6 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         if (collision.gameObject.tag == "Floor" && collision.gameObject.transform.position.y < transform.position.y)
         {
             grounded = false;
-        }
-        else if (collision.gameObject.tag == "Finish Line" && collision.gameObject.transform.position.y < transform.position.y && player_removed)
-        {
-            player_removed = true;
-
-            // Add score here
-
-            gameObject.SetActive(false);
-            Destroy(gameObject, 0.3f);
         }
     }
 
