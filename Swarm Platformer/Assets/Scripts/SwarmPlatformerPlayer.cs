@@ -7,6 +7,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
 {
     Rigidbody player_rb;
     Animator player_an;
+    Collider player_col;
     //MeshRenderer player_mr;
     //public Material sub_max_velocity_colour;
     //public Material max_velocity_colour;
@@ -18,11 +19,10 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     public GameObject giblet_torso;
     public GameObject blood_splatter;
     public GameObject camera;
-    AudioSource player_audio_source;
     public AudioClip[] player_death_noises;
     bool grounded;
     bool no_input;
-    bool player_killed;
+    bool player_removed;
 
     public bool Randomise_characteristics;
 
@@ -49,18 +49,29 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     float min_reaction_time = 0.0f;
     float max_reaction_time = 0.25f;
 
+
+    List<GameObject> Players;
+
     void Start()
     {
-        player_audio_source = GetComponent<AudioSource>();
         player_rb = GetComponent<Rigidbody>();
         player_an = GetComponent<Animator>();
+        player_col = GetComponent<Collider>();
         //player_mr = GetComponent<MeshRenderer>();
         grounded = false;
-        player_killed = false;
+        player_removed = false;
         if (Randomise_characteristics)
         {
             DetermineRandomCharacteristics();
         }
+
+        Players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+        foreach (var player in Players)
+        {
+            Physics.IgnoreCollision(player_col, player.GetComponent<Collider>());;
+        }
+
+
     }
 
     void Update()
@@ -155,9 +166,9 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         {
             grounded = true;
         }
-        else if (collision.gameObject.tag == "Hazard" && !player_killed)
+        else if (collision.gameObject.tag == "Hazard" && !player_removed)
         {
-            player_killed = true;
+            player_removed = true;
             int clip_index = UnityEngine.Random.Range(0, player_death_noises.Length);
             AudioSource.PlayClipAtPoint(player_death_noises[clip_index], camera.transform.position);
             Instantiate(blood_splatter, transform).transform.parent = null;
@@ -174,9 +185,9 @@ public class SwarmPlatformerPlayer : MonoBehaviour
             gameObject.SetActive(false);
             Destroy(gameObject, 0.3f);
         }
-        else if (collision.gameObject.tag == "Out Of Bounds Box" && !player_killed)
+        else if (collision.gameObject.tag == "Out Of Bounds Box" && !player_removed)
         {
-            player_killed = true;
+            player_removed = true;
             int clip_index = UnityEngine.Random.Range(0, player_death_noises.Length);
             AudioSource.PlayClipAtPoint(player_death_noises[clip_index], camera.transform.position);
             Destroy(gameObject);
@@ -188,6 +199,15 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         if (collision.gameObject.tag == "Floor" && collision.gameObject.transform.position.y < transform.position.y)
         {
             grounded = false;
+        }
+        else if (collision.gameObject.tag == "Finish Line" && collision.gameObject.transform.position.y < transform.position.y && player_removed)
+        {
+            player_removed = true;
+
+            // Add score here
+
+            gameObject.SetActive(false);
+            Destroy(gameObject, 0.3f);
         }
     }
 

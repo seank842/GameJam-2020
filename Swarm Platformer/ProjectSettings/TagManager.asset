@@ -9,6 +9,7 @@ TagManager:
   - Hazard
   - Falling Floor
   - Out Of Bounds Box
+  - Finish Line
   layers:
   - Default
   - TransparentFX
