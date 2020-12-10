@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class MovingBoulder : MonoBehaviour
 {
-    private Vector3 posA;
+    /******************************/
+    /*   Don't delete this code   */
+    /******************************/
+
+    /*private Vector3 posA;
     private Vector3 posB;
     private Vector3 nextPos;
 
@@ -41,5 +45,10 @@ public class MovingBoulder : MonoBehaviour
     private void ChangeDestination()
     {
         nextPos = nextPos != posA ? posA : posB;
-    }
+    }*/
+
+
+
+
+    //will finish moving platform tomorrow
 }
