@@ -61,6 +61,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         //player_mr = GetComponent<MeshRenderer>();
         grounded = false;
         player_removed = false;
+        camera = GameObject.Find("/GlobalSceneManager/Main Camera");
         if (Randomise_characteristics)
         {
             DetermineRandomCharacteristics();
