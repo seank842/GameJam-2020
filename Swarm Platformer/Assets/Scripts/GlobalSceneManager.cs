@@ -16,7 +16,10 @@ public class GlobalSceneManager : MonoBehaviour
     [SerializeField]
     private GameObject _gameOverCanvas;
     [SerializeField]
+    private GameObject _pauseMenuCanvas;
+    [SerializeField]
     private List<GameObject> _players;
+    private bool _pause = false;
     #endregion
 
     #region Properties 
@@ -26,15 +29,20 @@ public class GlobalSceneManager : MonoBehaviour
         get => _suvivorsText;
         set => _suvivorsText = value;
     }
+    public GameObject GameTimeManager
+    {
+        get => _gameTimeManager;
+        set => _gameTimeManager = value;
+    }
     public GameObject GameOverCanvas
     {
         get => _gameOverCanvas;
         set => _gameOverCanvas = value;
     }
-    public GameObject GameTimeManager
+    public GameObject PauseMenuCanvas
     {
-        get => _gameTimeManager;
-        set => _gameTimeManager = value;
+        get => _pauseMenuCanvas;
+        set => _pauseMenuCanvas = value;
     }
     public List<GameObject> Players
     {
@@ -43,6 +51,7 @@ public class GlobalSceneManager : MonoBehaviour
     }
     #endregion
 
+    #region Unity Methods
     // Start is called before the first frame update
     void Start()
     {
@@ -57,28 +66,21 @@ public class GlobalSceneManager : MonoBehaviour
         GameTimeManager.GetComponent<GameTimeManager>().GameOverEvent += GameTimeManager_GameOverEvent;
     }
 
-    private void GlobalSceneManager_PlayerDestroyedEvent(object sender, EventArgs e)
+    // Update is called once per frame
+    void Update()
     {
-        var senderScript = (SwarmPlatformerPlayer)sender;
-        var senderGameObject = senderScript.gameObject;
-        senderScript.PlayerDestroyedEvent -= GlobalSceneManager_PlayerDestroyedEvent;
-        if (Players.Where(p => !p.GetInstanceID().Equals(senderGameObject.GetInstanceID())).Any())
-        {
-            PlayerChangedEvent?.Invoke(this, senderGameObject);
-            Players.Remove(senderGameObject);
-        }
-        else
-        {
-            TriggerGameOver("Reason");
-        }
+        if (Input.GetKeyDown("escape"))
+            ToggelPause();
+        SurvivorsText.text = $"Survivors: {Players.Count}";
     }
 
-    private void GameTimeManager_GameOverEvent(object sender, EventArgs e)
+    private void OnDestroy()
     {
-        TriggerGameOver("Reason");
+        GameTimeManager.GetComponent<GameTimeManager>().GameOverEvent -= GameTimeManager_GameOverEvent;
     }
+    #endregion
 
-    public void TriggerGameOver(string reason)
+    private void TriggerGameOver()
     {
         foreach (var player in Players)
         {
@@ -87,6 +89,13 @@ public class GlobalSceneManager : MonoBehaviour
         GameOver = true;
         GameOverCanvas.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    public void ToggelPause()
+    {
+        _pause = !_pause;
+        Time.timeScale = _pause ? 0 : 1;
+        PauseMenuCanvas.SetActive(_pause);
     }
 
     public void RetryScene()
@@ -110,16 +119,30 @@ public class GlobalSceneManager : MonoBehaviour
 #endif
     }
 
+    #region Events
     public event EventHandler<GameObject> PlayerChangedEvent;
+    #endregion
 
-    // Update is called once per frame
-    void Update()
+    #region Event Calls
+    private void GlobalSceneManager_PlayerDestroyedEvent(object sender, EventArgs e)
     {
-        SurvivorsText.text = $"Survivors: {Players.Count}";
+        var senderScript = (SwarmPlatformerPlayer)sender;
+        var senderGameObject = senderScript.gameObject;
+        senderScript.PlayerDestroyedEvent -= GlobalSceneManager_PlayerDestroyedEvent;
+        if (Players.Where(p => !p.GetInstanceID().Equals(senderGameObject.GetInstanceID())).Any())
+        {
+            PlayerChangedEvent?.Invoke(this, senderGameObject);
+            Players.Remove(senderGameObject);
+        }
+        else
+        {
+            TriggerGameOver();
+        }
     }
 
-    private void OnDestroy()
+    private void GameTimeManager_GameOverEvent(object sender, EventArgs e)
     {
-        GameTimeManager.GetComponent<GameTimeManager>().GameOverEvent -= GameTimeManager_GameOverEvent;
+        TriggerGameOver();
     }
+    #endregion
 }
