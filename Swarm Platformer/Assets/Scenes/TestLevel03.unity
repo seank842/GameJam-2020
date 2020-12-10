@@ -153,7 +153,7 @@ Transform:
   - {fileID: 841799398}
   - {fileID: 2035141853}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &50978248
 GameObject:
@@ -343,7 +343,7 @@ Transform:
   m_LocalScale: {x: 900, y: 1, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &152651431
 GameObject:
@@ -662,7 +662,7 @@ Transform:
   - {fileID: 1465524294}
   - {fileID: 152651432}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &316241745 stripped
 Transform:
@@ -679,7 +679,7 @@ PrefabInstance:
     - target: {fileID: 5960157315352534133, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1188345694}
+      objectReference: {fileID: 0}
     - target: {fileID: 5960157315352534135, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: m_Name
       value: Contestant_V1_Prefab (2)
@@ -755,7 +755,7 @@ PrefabInstance:
     - target: {fileID: 5960157315352534133, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1188345694}
+      objectReference: {fileID: 0}
     - target: {fileID: 5960157315352534135, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: m_Name
       value: Contestant_V1_Prefab (7)
@@ -821,7 +821,7 @@ PrefabInstance:
     - target: {fileID: 5960157315352534133, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1188345694}
+      objectReference: {fileID: 0}
     - target: {fileID: 5960157315352534135, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: m_Name
       value: Contestant_V1_Prefab (3)
@@ -1167,7 +1167,7 @@ PrefabInstance:
     - target: {fileID: 5960157315352534133, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1188345694}
+      objectReference: {fileID: 0}
     - target: {fileID: 5960157315352534135, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: m_Name
       value: Contestant_V1_Prefab (5)
@@ -1218,11 +1218,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
---- !u!1 &1188345694 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5299155713030842934, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
-  m_PrefabInstance: {fileID: 247083622}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1224880575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,7 +1323,7 @@ PrefabInstance:
     - target: {fileID: 5960157315352534133, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1188345694}
+      objectReference: {fileID: 0}
     - target: {fileID: 5960157315352534135, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: m_Name
       value: Contestant_V1_Prefab (8)
@@ -1389,7 +1384,7 @@ PrefabInstance:
     - target: {fileID: 5960157315352534133, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1188345694}
+      objectReference: {fileID: 0}
     - target: {fileID: 5960157315352534135, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: m_Name
       value: Contestant_V1_Prefab (6)
@@ -1478,7 +1473,7 @@ Transform:
   - {fileID: 288073450}
   - {fileID: 398891164}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1407824140
 GameObject:
@@ -1570,7 +1565,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1465524293
 GameObject:
@@ -1682,7 +1677,7 @@ PrefabInstance:
     - target: {fileID: 5960157315352534133, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1188345694}
+      objectReference: {fileID: 0}
     - target: {fileID: 5960157315352534135, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: m_Name
       value: Contestant_V1_Prefab (9)
@@ -1848,7 +1843,7 @@ PrefabInstance:
     - target: {fileID: 5960157315352534133, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1188345694}
+      objectReference: {fileID: 0}
     - target: {fileID: 5960157315352534135, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: m_Name
       value: Contestant_V1_Prefab (1)
@@ -2057,6 +2052,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc55b08836d8fc846827e786617fdbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fallDelay: 0
+  stillMaterial: {fileID: 0}
+  fallingMaterial: {fileID: 0}
 --- !u!65 &2074791236
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2129,7 +2127,7 @@ PrefabInstance:
     - target: {fileID: 5960157315352534133, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1188345694}
+      objectReference: {fileID: 0}
     - target: {fileID: 5960157315352534135, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: m_Name
       value: Contestant_V1_Prefab
@@ -2190,7 +2188,7 @@ PrefabInstance:
     - target: {fileID: 5960157315352534133, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 1188345694}
+      objectReference: {fileID: 0}
     - target: {fileID: 5960157315352534135, guid: da314d3274bee4e4f8c3e5be7789cc1c, type: 3}
       propertyPath: m_Name
       value: Contestant_V1_Prefab (4)
