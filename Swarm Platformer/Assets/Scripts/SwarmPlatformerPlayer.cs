@@ -18,12 +18,13 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     public GameObject giblet_head;
     public GameObject giblet_torso;
     public GameObject blood_splatter;
-    public GameObject camera;
+    public new GameObject camera;
     public AudioClip[] player_death_noises;
     public AudioClip player_victory_noise;
     public bool grounded;
     bool no_input;
     bool player_removed;
+    private bool _playerFinished = false;
 
     public bool Randomise_characteristics;
 
@@ -198,7 +199,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         {
             player_removed = true;
 
-            // Add score here
+            _playerFinished = true;
 
             AudioSource.PlayClipAtPoint(player_victory_noise, camera.transform.position);
             gameObject.SetActive(false);
@@ -225,8 +226,8 @@ public class SwarmPlatformerPlayer : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerDestroyedEvent?.Invoke(this, null);
+        PlayerDestroyedEvent?.Invoke(this, _playerFinished);
     }
 
-    public event EventHandler PlayerDestroyedEvent;
+    public event EventHandler<bool> PlayerDestroyedEvent;
 }

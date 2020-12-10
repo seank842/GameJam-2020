@@ -14,11 +14,19 @@ public class GlobalSceneManager : MonoBehaviour
     [SerializeField]
     private GameObject _gameTimeManager;
     [SerializeField]
+    private GameObject _scoreSystem;
+    [SerializeField]
     private GameObject _gameOverCanvas;
     [SerializeField]
     private GameObject _pauseMenuCanvas;
     [SerializeField]
     private List<GameObject> _players;
+    [SerializeField]
+    private int _requiredPlayersToFinish;
+    [SerializeField]
+    private string _nextLevel;
+    [SerializeField]
+    private GameObject _nextLevelButton;
     private bool _pause = false;
     #endregion
 
@@ -33,6 +41,11 @@ public class GlobalSceneManager : MonoBehaviour
     {
         get => _gameTimeManager;
         set => _gameTimeManager = value;
+    }
+    public GameObject ScoreSystem
+    {
+        get => _scoreSystem;
+        set => _scoreSystem = value;
     }
     public GameObject GameOverCanvas
     {
@@ -49,6 +62,21 @@ public class GlobalSceneManager : MonoBehaviour
         get => _players;
         set => _players = value;
     }
+    public string NextLevel
+    {
+        get => _nextLevel;
+        set => _nextLevel = value;
+    }
+    public GameObject NextLevelButton
+    {
+        get => _nextLevelButton;
+        set => _nextLevelButton = value;
+    }
+    public int RequiredPlayersToFinished
+    {
+        get => _requiredPlayersToFinish;
+        set => _requiredPlayersToFinish = value;
+    }
     #endregion
 
     #region Unity Methods
@@ -60,6 +88,9 @@ public class GlobalSceneManager : MonoBehaviour
         {
             player.GetComponent<SwarmPlatformerPlayer>().PlayerDestroyedEvent += GlobalSceneManager_PlayerDestroyedEvent;
         }
+
+        if (string.IsNullOrEmpty(_nextLevel))
+            NextLevelButton.GetComponent<Button>().interactable = false;
 
         PlayerChangedEvent.Invoke(this, default);
 
@@ -91,6 +122,12 @@ public class GlobalSceneManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    private void TriggerVictory()
+    {
+
+        Time.timeScale = 0;
+    }
+
     public void ToggelPause()
     {
         _pause = !_pause;
@@ -110,6 +147,12 @@ public class GlobalSceneManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void GoToNextLevel()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(_nextLevel);
+        Time.timeScale = 1;
+    }
+
     public void QuitApplication()
     {
 #if UNITY_EDITOR
@@ -124,8 +167,11 @@ public class GlobalSceneManager : MonoBehaviour
     #endregion
 
     #region Event Calls
-    private void GlobalSceneManager_PlayerDestroyedEvent(object sender, EventArgs e)
+    private void GlobalSceneManager_PlayerDestroyedEvent(object sender, bool playerFinished)
     {
+        if(playerFinished)
+            ScoreSystem.GetComponent<ScoreSystem>().AddToPlayersFinished();
+
         var senderScript = (SwarmPlatformerPlayer)sender;
         var senderGameObject = senderScript.gameObject;
         senderScript.PlayerDestroyedEvent -= GlobalSceneManager_PlayerDestroyedEvent;
@@ -136,7 +182,10 @@ public class GlobalSceneManager : MonoBehaviour
         }
         else
         {
-            TriggerGameOver();
+            if (ScoreSystem.GetComponent<ScoreSystem>().PlayersFinished == _requiredPlayersToFinish)
+                TriggerGameOver();
+            else
+                TriggerVictory();
         }
     }
 

@@ -31,7 +31,7 @@ public class PickupItem : MonoBehaviour
         get => _physicalPickup;
         set => _physicalPickup = value;
     }
-    private ScoreSystem ScoreSystemScript
+    private ScoreSystem _scoreSystemScript
     {
         get => _scoreSystem.GetComponent<ScoreSystem>();
     }
@@ -51,7 +51,7 @@ public class PickupItem : MonoBehaviour
         {
             if (used)
                 return;
-            ScoreSystemScript.AddToPickups(_value);
+            _scoreSystemScript.AddToPickups(_value);
             _physicalPickup.SetActive(false);
             used = true;
         }
