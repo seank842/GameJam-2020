@@ -4259,6 +4259,10 @@ PrefabInstance:
       propertyPath: _startTimeMinuets
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 1644905689825286565, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4303625424020260252, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
       propertyPath: m_Layer
       value: 5

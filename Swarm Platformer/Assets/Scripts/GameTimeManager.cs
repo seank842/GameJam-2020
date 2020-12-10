@@ -14,6 +14,8 @@ public class GameTimeManager : MonoBehaviour
     private int _startTimeMinuets;
     [SerializeField]
     private Text _timerText;
+    [SerializeField]
+    private Text _victoryFinalTimeText;
     #endregion
 
     #region Properties
@@ -23,6 +25,11 @@ public class GameTimeManager : MonoBehaviour
     {
         get => _timerText;
         set => _timerText = value;
+    }
+    public Text VictoryFinalTimeText
+    {
+        get => _victoryFinalTimeText;
+        set => _victoryFinalTimeText = value;
     }
     #endregion
 
@@ -46,7 +53,7 @@ public class GameTimeManager : MonoBehaviour
             _timeLeft = TimeSpan.Zero;
             GameOverEvent.Invoke(this, null);
         }
-        TimerText.text = _timeLeft.ToString(@"m\:ss\.fff");
+        VictoryFinalTimeText.text = TimerText.text = _timeLeft.ToString(@"m\:ss\.fff");
     }
 
     public event EventHandler GameOverEvent;
