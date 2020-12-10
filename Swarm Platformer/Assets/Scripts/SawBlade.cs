@@ -5,6 +5,7 @@ using UnityEngine;
 public class SawBlade : MonoBehaviour
 {
     float timer;
+    public float pos;
     // Update is called once per frame
     private void Start()
     {
@@ -16,7 +17,7 @@ public class SawBlade : MonoBehaviour
         {
             transform.Rotate(new Vector3(0f, 0f, 1f));
             timer += Time.deltaTime;
-            float new_y_position = transform.position.y + 0.15f * -Mathf.Cos(1.0f * timer);
+            float new_y_position = transform.position.y + pos * -Mathf.Cos(1.0f * timer);
             transform.position = new Vector3(transform.position.x, new_y_position, transform.position.z);
         }
     }
