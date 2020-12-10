@@ -26,6 +26,10 @@ public class GameTimeManager : MonoBehaviour
         get => _timerText;
         set => _timerText = value;
     }
+    public TimeSpan CurrentTimeLeft
+    {
+        get => _timeLeft;
+    }
     public Text VictoryFinalTimeText
     {
         get => _victoryFinalTimeText;

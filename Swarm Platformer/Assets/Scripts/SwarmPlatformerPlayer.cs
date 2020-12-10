@@ -86,7 +86,6 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         bool descending = player_rb.velocity.y < -0.1f;
         if (descending)
         {
-            print("descending with velocity: " + player_rb.velocity.y);
             player_an.SetBool("falling down", true);
             player_an.SetBool("jumping up", false);
             player_rb.velocity += Vector3.up * Physics2D.gravity.y * (fall_multiplier - 1.0f) * Time.deltaTime;

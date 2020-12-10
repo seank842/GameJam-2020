@@ -1407,6 +1407,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 595f24f376d606a4dae54d9e0807bac7, type: 3}
+--- !u!1 &187105359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4303625425587757543, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+  m_PrefabInstance: {fileID: 1073426212}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &215038567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2001,6 +2006,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1889314235863852409, guid: 77bb36cd21b921641b8f1e11d7488b0e, type: 3}
   m_PrefabInstance: {fileID: 500033807}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &480244238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1644905689825286565, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+  m_PrefabInstance: {fileID: 1073426212}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &495538334
 PrefabInstance:
@@ -4259,6 +4269,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4303625424119645389, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: _startTimeMinuets
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4303625424214676312, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -4283,6 +4297,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4303625424674291034, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: _scoreSystem
+      value: 
+      objectReference: {fileID: 187105359}
+    - target: {fileID: 4303625424674291034, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: _victoryCanvas
+      value: 
+      objectReference: {fileID: 480244238}
     - target: {fileID: 4303625424674291035, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
       propertyPath: m_LocalPosition.x
       value: -66.1
@@ -4297,7 +4319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4303625424740071434, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 465
+      value: 156.2
       objectReference: {fileID: 0}
     - target: {fileID: 4303625424740071436, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
       propertyPath: current_player
@@ -4331,6 +4353,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4303625425587757541, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+      propertyPath: _gameTimeManger
+      value: 
+      objectReference: {fileID: 1829376904}
     - target: {fileID: 4303625425755141543, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -6902,6 +6928,11 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5422736861327255809, guid: be1c822ccf9cc774a953b31ff759f441, type: 3}
   m_PrefabInstance: {fileID: 635112879}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1829376904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4303625424119645388, guid: b20581b71bc496243baa4bb63b80c311, type: 3}
+  m_PrefabInstance: {fileID: 1073426212}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1851362711
 GameObject:

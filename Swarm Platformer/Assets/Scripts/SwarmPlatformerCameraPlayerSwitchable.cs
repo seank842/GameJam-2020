@@ -5,7 +5,7 @@ public class SwarmPlatformerCameraPlayerSwitchable : SwarmPlatformerCamera
 {
     public GlobalSceneManager scene_manager;
 
-    void Start()
+    void Awake()
     {
         scene_manager.PlayerChangedEvent += Scene_manager_PlayerChangedEvent;
     }

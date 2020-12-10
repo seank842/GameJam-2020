@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class ScoreSystem : MonoBehaviour
     private Text _playersFinishedText;
     [SerializeField]
     private Text _finalScoreText;
+    [SerializeField]
+    private GameObject _gameTimeManger;
     #endregion
 
     #region Properties
@@ -38,6 +41,15 @@ public class ScoreSystem : MonoBehaviour
         get => _finalScoreText;
         set => _finalScoreText = value;
     }
+    public GameObject GameTimeManager
+    {
+        get => _gameTimeManger;
+        set => _gameTimeManger = value;
+    }
+    public GameTimeManager GameTimeManagerScript
+    {
+        get => _gameTimeManger.GetComponent<GameTimeManager>();
+    }
     #endregion
 
     #region Unity Methods
@@ -53,6 +65,8 @@ public class ScoreSystem : MonoBehaviour
     void Update()
     {
         _currentScore = (_playersFinished * 10) + _pickups.Sum();
+        _finalScoreText.text = (_currentScore + (int)((GameTimeManagerScript.CurrentTimeLeft < TimeSpan.FromSeconds(1) ? 1 : GameTimeManagerScript.CurrentTimeLeft.TotalSeconds) * 0.1)).ToString();
+        _playersFinishedText.text = PlayersFinished.ToString();
         _scoreText.text = $"Score: {_currentScore}";
     }
     #endregion

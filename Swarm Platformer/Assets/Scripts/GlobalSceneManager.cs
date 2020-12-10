@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,8 @@ public class GlobalSceneManager : MonoBehaviour
     [SerializeField]
     private GameObject _pauseMenuCanvas;
     [SerializeField]
+    private GameObject _victoryCanvas;
+    [SerializeField]
     private List<GameObject> _players;
     [SerializeField]
     private int _requiredPlayersToFinish;
@@ -31,7 +34,7 @@ public class GlobalSceneManager : MonoBehaviour
     #endregion
 
     #region Properties 
-    public static bool GameOver { get; private set; }
+    public bool GameOver { get; private set; }
     public Text SurvivorsText
     {
         get => _suvivorsText;
@@ -56,6 +59,11 @@ public class GlobalSceneManager : MonoBehaviour
     {
         get => _pauseMenuCanvas;
         set => _pauseMenuCanvas = value;
+    }
+    public GameObject VictoryCanvas
+    {
+        get => _victoryCanvas;
+        set => _victoryCanvas = value;
     }
     public List<GameObject> Players
     {
@@ -95,12 +103,13 @@ public class GlobalSceneManager : MonoBehaviour
         PlayerChangedEvent.Invoke(this, default);
 
         GameTimeManager.GetComponent<GameTimeManager>().GameOverEvent += GameTimeManager_GameOverEvent;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("escape"))
+        if (Input.GetKeyDown("escape") && !GameOver)
             ToggelPause();
         SurvivorsText.text = $"Survivors: {Players.Count}";
     }
@@ -124,7 +133,12 @@ public class GlobalSceneManager : MonoBehaviour
 
     private void TriggerVictory()
     {
-
+        GameOver = true;
+        foreach (var player in Players)
+        {
+            player.GetComponent<SwarmPlatformerPlayer>().PlayerDestroyedEvent -= GlobalSceneManager_PlayerDestroyedEvent;
+        }
+        VictoryCanvas.SetActive(true);
         Time.timeScale = 0;
     }
 
@@ -137,20 +151,18 @@ public class GlobalSceneManager : MonoBehaviour
 
     public void RetryScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GotToMainMenu()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
         Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
     }
 
     public void GoToNextLevel()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(_nextLevel);
-        Time.timeScale = 1;
     }
 
     public void QuitApplication()
@@ -182,7 +194,7 @@ public class GlobalSceneManager : MonoBehaviour
         }
         else
         {
-            if (ScoreSystem.GetComponent<ScoreSystem>().PlayersFinished == _requiredPlayersToFinish)
+            if (ScoreSystem.GetComponent<ScoreSystem>().PlayersFinished < _requiredPlayersToFinish)
                 TriggerGameOver();
             else
                 TriggerVictory();
