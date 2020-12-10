@@ -8,6 +8,7 @@ public class FallingFloor : MonoBehaviour
     //private GameObject platformObject;
 
     public float fallDelay;
+    public float deleteTimer;
     public Material stillMaterial;
     public Material fallingMaterial;
     private MeshRenderer meshR;
@@ -36,7 +37,7 @@ public class FallingFloor : MonoBehaviour
         platform.AddForce(0, -10000, 0);
 
         meshR.material = fallingMaterial;
-        Destroy(gameObject, 2.5f);
+        Destroy(gameObject, deleteTimer);
         yield return 0;
     }
 
