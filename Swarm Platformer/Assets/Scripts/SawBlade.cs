@@ -12,7 +12,7 @@ public class SawBlade : MonoBehaviour
     }
     void Update()
     {
-        if (!GlobalSceneManager.GameOver) // Or Pause or Victory
+        if (Time.timeScale!=0) // Or Pause or Victory
         {
             transform.Rotate(new Vector3(0f, 0f, 1f));
             timer += Time.deltaTime;

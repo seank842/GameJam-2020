@@ -25,6 +25,8 @@ public class GlobalSceneManager : MonoBehaviour
     private int _requiredPlayersToFinish;
     [SerializeField]
     private string _nextLevel;
+    [SerializeField]
+    private GameObject _nextLevelButton;
     private bool _pause = false;
     #endregion
 
@@ -65,6 +67,11 @@ public class GlobalSceneManager : MonoBehaviour
         get => _nextLevel;
         set => _nextLevel = value;
     }
+    public GameObject NextLevelButton
+    {
+        get => _nextLevelButton;
+        set => _nextLevelButton = value;
+    }
     public int RequiredPlayersToFinished
     {
         get => _requiredPlayersToFinish;
@@ -83,7 +90,7 @@ public class GlobalSceneManager : MonoBehaviour
         }
 
         if (string.IsNullOrEmpty(_nextLevel))
-            GameObject.Find("/GlobalSceneManager/VictoryCanvas/Panel/NextLevelButton").GetComponent<Button>().interactable = false;
+            NextLevelButton.GetComponent<Button>().interactable = false;
 
         PlayerChangedEvent.Invoke(this, default);
 

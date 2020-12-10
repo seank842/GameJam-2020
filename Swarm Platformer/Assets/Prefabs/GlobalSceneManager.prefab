@@ -1626,8 +1626,9 @@ MonoBehaviour:
   _gameOverCanvas: {fileID: 4303625425237067754}
   _pauseMenuCanvas: {fileID: 4303625424428936800}
   _players: []
-  _requiredPlayersToFinish: 0
+  _requiredPlayersToFinish: 1
   _nextLevel: 
+  _nextLevelButton: {fileID: 3779749497475629573}
 --- !u!1 &4303625424740071921
 GameObject:
   m_ObjectHideFlags: 0
