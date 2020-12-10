@@ -21,7 +21,7 @@ public class SwarmPlatformerPlayer : MonoBehaviour
     public GameObject camera;
     public AudioClip[] player_death_noises;
     public AudioClip player_victory_noise;
-    bool grounded;
+    public bool grounded;
     bool no_input;
     bool player_removed;
 
@@ -82,10 +82,10 @@ public class SwarmPlatformerPlayer : MonoBehaviour
         HandleMoving();
         HandleJumping();
 
-        bool descending = player_rb.velocity.y < 0.0f;
+        bool descending = player_rb.velocity.y < -0.1f;
         if (descending)
         {
-            //print("descending with velocity: " + player_rb.velocity.y);
+            print("descending with velocity: " + player_rb.velocity.y);
             player_an.SetBool("falling down", true);
             player_an.SetBool("jumping up", false);
             player_rb.velocity += Vector3.up * Physics2D.gravity.y * (fall_multiplier - 1.0f) * Time.deltaTime;
@@ -203,6 +203,14 @@ public class SwarmPlatformerPlayer : MonoBehaviour
             AudioSource.PlayClipAtPoint(player_victory_noise, camera.transform.position);
             gameObject.SetActive(false);
             Destroy(gameObject, 0.3f);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor" && collision.gameObject.transform.position.y < transform.position.y)
+        {
+            grounded = true;
         }
     }
 
