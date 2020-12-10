@@ -39,7 +39,7 @@ public class GameTimeManager : MonoBehaviour
         if (Time.timeScale == 0) return;
         if (_timeLeft >= TimeSpan.Zero)
         {
-            _timeLeft -= TimeSpan.FromSeconds(Time.deltaTime);
+            _timeLeft -= TimeSpan.FromSeconds(Time.unscaledDeltaTime);
         }
         else if(_timeLeft != TimeSpan.Zero)
         {
